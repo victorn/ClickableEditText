@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ClickableEditText">
+        <attr name="cet_drawableStart" format="reference"/>
+        <attr name="cet_drawableStartTint" format="color"/>
+        <attr name="cet_drawableEnd" format="reference"/>
+        <attr name="cet_drawableEndTint" format="color"/>
+        <attr name="cet_hideStartDrawableWhenEmpty" format="boolean"/>
+        <attr name="cet_hideEndDrawableWhenEmpty" format="boolean"/>
+    </declare-styleable>
+
+</resources>
