@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity implements OnCompoundButtonC
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(com.vnidens.android.clickableedittext.sample.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-        ClickableEditText cet = (ClickableEditText)findViewById(com.vnidens.android.clickableedittext.sample.R.id.cet0);
-        ClickableEditText cet1 = (ClickableEditText)findViewById(com.vnidens.android.clickableedittext.sample.R.id.cet1);
-        ClickableTextInputEditText ctiet = (ClickableTextInputEditText)findViewById(com.vnidens.android.clickableedittext.sample.R.id.ctiet0);
-        ClickableAutoCompleteTextView cactv = (ClickableAutoCompleteTextView)findViewById(com.vnidens.android.clickableedittext.sample.R.id.cactv);
+        ClickableEditText cet = (ClickableEditText)findViewById(R.id.cet0);
+        ClickableEditText cet1 = (ClickableEditText)findViewById(R.id.cet1);
+        ClickableTextInputEditText ctiet = (ClickableTextInputEditText)findViewById(R.id.ctiet0);
+        ClickableAutoCompleteTextView cactv = (ClickableAutoCompleteTextView)findViewById(R.id.cactv);
 
         if(cet != null){
             cet.setOnEndButtonClickListener(this);
@@ -42,18 +42,18 @@ public class MainActivity extends AppCompatActivity implements OnCompoundButtonC
 
         if(ctiet != null){
             ctiet.setOnStartButtonClickListener(this);
-            ctiet.setEndButtonTintRes(com.vnidens.android.clickableedittext.sample.R.color.green_700);
+            ctiet.setEndButtonTintRes(R.color.button_tint_list_green);
         }
 
         if(cet1 != null){
             cet1.setStartButtonDrawable(ResourcesCompat.getDrawable(getResources(),
-                    com.vnidens.android.clickableedittext.sample.R.drawable.ic_error_outline_black_24dp,
+                    R.drawable.ic_error_outline_black_24dp,
                     getTheme()));
-            cet1.setEndButtonDrawable(com.vnidens.android.clickableedittext.sample.R.drawable.ic_help_black_24dp);
+            cet1.setEndButtonDrawable(R.drawable.ic_help_black_24dp);
 
-            cet1.setStartButtonTintRes(com.vnidens.android.clickableedittext.sample.R.color.blue_500);
+            cet1.setStartButtonTintRes(R.color.blue_500);
             cet1.setEndButtonTintList(ResourcesCompat.getColorStateList(getResources(),
-                    com.vnidens.android.clickableedittext.sample.R.color.button_tint_list_grey,
+                    R.color.button_tint_list_grey,
                     getTheme()));
 
             cet1.setOnStartButtonClickListener(this);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnCompoundButtonC
 
             cactv.setStartButtonTintList(null);
 
-            cactv.setEndButtonDrawable(com.vnidens.android.clickableedittext.sample.R.drawable.ic_clear_black_24dp);
+            cactv.setEndButtonDrawable(R.drawable.ic_clear_black_24dp);
             cactv.setOnEndButtonClickListener(this);
         }
     }
@@ -76,49 +76,49 @@ public class MainActivity extends AppCompatActivity implements OnCompoundButtonC
     @Override
     public void onCompoundButtonClicked(@NonNull EditText view, @IdRes long which){
         switch(view.getId()){
-            case com.vnidens.android.clickableedittext.sample.R.id.cet0:
-                if(which == com.vnidens.android.clickableedittext.sample.R.id.cet_button_end){
+            case R.id.cet0:
+                if(which == R.id.cet_button_end){
                     Toast.makeText(MainActivity.this,
-                            "ClickableEditText1 :: End button clicked",
+                            R.string.end_button_clicked,
                             Toast.LENGTH_SHORT)
                             .show();
 
                     ClickableEditText cet = (ClickableEditText)view;
 
                     cet.setEndButtonDrawable(ResourcesCompat.getDrawable(getResources(),
-                            iconVisible ? com.vnidens.android.clickableedittext.sample.R.drawable.ic_visibility_black_24dp : com.vnidens.android.clickableedittext.sample.R.drawable.ic_visibility_off_black_24dp,
+                            iconVisible ? R.drawable.ic_visibility_black_24dp : R.drawable.ic_visibility_off_black_24dp,
                             getTheme()));
 
                     iconVisible = !iconVisible;
                 }
                 break;
 
-            case com.vnidens.android.clickableedittext.sample.R.id.ctiet0:
-                if(which == com.vnidens.android.clickableedittext.sample.R.id.cet_button_start){
+            case R.id.ctiet0:
+                if(which == R.id.cet_button_start){
                     Toast.makeText(MainActivity.this,
-                            "ClickableTextInputEditText1 :: Start button clicked",
+                            R.string.start_button_clicked,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
 
-            case com.vnidens.android.clickableedittext.sample.R.id.cet1:
-                if(which == com.vnidens.android.clickableedittext.sample.R.id.cet_button_start){
+            case R.id.cet1:
+                if(which == com.vnidens.clickableedittext.sample.R.id.cet_button_start){
                     Toast.makeText(MainActivity.this,
-                            "ClickableEditText2 :: Start button clicked",
+                            R.string.start_button_clicked,
                             Toast.LENGTH_SHORT)
                             .show();
                 } else {
                     Toast.makeText(MainActivity.this,
-                            "ClickableEditText2 :: End button clicked",
+                            R.string.end_button_clicked,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
 
                 break;
 
-            case com.vnidens.android.clickableedittext.sample.R.id.cactv:
-                if(which == com.vnidens.android.clickableedittext.sample.R.id.cet_button_end){
+            case R.id.cactv:
+                if(which == com.vnidens.clickableedittext.sample.R.id.cet_button_end){
                     view.setText("");
                 }
                 break;

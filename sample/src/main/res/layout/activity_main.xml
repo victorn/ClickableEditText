@@ -16,7 +16,7 @@
         android:id="@+id/cet0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ClickableEditText"
+        android:hint="@string/clickableedittext"
         app:cet_drawableEnd="@drawable/ic_visibility_black_24dp"
         app:cet_drawableEndTint="@color/button_tint_list_red"/>
 
@@ -24,17 +24,19 @@
         android:id="@+id/cet1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ClickableEditText Dynamic Buttons"/>
+        android:layout_marginTop="@dimen/margin_vertical_default"
+        android:hint="@string/clickableedittext_dynamic_buttons"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_vertical_default">
 
         <com.vnidens.clickableedittext.ClickableTextInputEditText
             android:id="@+id/ctiet0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ClickableTextInputEditText"
+            android:hint="@string/clickabletextinputedittext"
             app:cet_drawableEnd="@drawable/ic_done_black_24dp"
             app:cet_drawableStart="@drawable/help_drawable"/>
 
@@ -44,7 +46,8 @@
         android:id="@+id/cactv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ClickableAutoCompleteTextView"
+        android:layout_marginTop="@dimen/margin_vertical_default"
+        android:hint="@string/clickableautocompletetextview"
         app:cet_drawableStart="@drawable/ic_cached_black_24dp"
         app:cet_drawableStartTint="@color/colorAccent"
         app:cet_drawableEndTint="@color/button_tint_list_red"/>

@@ -49,7 +49,7 @@ From code:
 
 In XML:
 ```xml
-    <com.vnidens.android.clickableedittext.ClickableEditText
+    <com.vnidens.clickableedittext.ClickableEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ClickableEditText"
