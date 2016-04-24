@@ -1,5 +1,6 @@
 # ClickableEditText
 
+[![Release](https://jitpack.io/v/vnidens/ClickableEditText.svg)](https://jitpack.io/#vnidens/ClickableEditText)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/vnidens/clickableedittext/blob/master/LICENSE)
 
 The library extends Android edit text widgets by adding the ability to treat some compound drawables as buttons.
@@ -21,7 +22,11 @@ The complete list of extended classes:
 
 # Sample Project
 
+You can get the latest APK from [this repo](https://github.com/vnidens/clickableedittext/blob/master/sample/sample.apk) or download it from Google Play:
+
 # Gradle Dependency
+
+### Repository
 
 Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
 
@@ -33,6 +38,20 @@ allprojects {
 	}
 }
 ```
+
+### Library dependency
+
+```gradle
+dependencies {
+
+    // other dependencies
+
+    compile('com.github.vnidens:ClickableEditText:0.5.0.1'){
+        transitive = true
+    }
+}
+```
+
 
 # Drawables
 
