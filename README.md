@@ -24,7 +24,7 @@ The complete list of extended classes:
 
 You can get the latest APK from [this repo](https://github.com/vnidens/clickableedittext/blob/master/sample/sample.apk) or download it from Google Play:
 
-<a href='https://play.google.com/store/apps/details?id=com.vnidens.clickableedittext.sample'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.vnidens.clickableedittext.sample'  target="_blank"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="60"/></a>
 
 # Gradle Dependency
 
