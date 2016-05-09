@@ -13,7 +13,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -54,11 +56,12 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
     public static final int[] STATE_DEFAULT = new int[]{android.R.attr.state_enabled};
     public static final int[] STATE_PRESSED = new int[]{android.R.attr.state_pressed};
 
-    private static final int EXTRA_TOUCHABLE_AREA           = 24;
+    private static final int EXTRA_TOUCHABLE_AREA           = 8; //dp
     private static final int DRAWABLE_POSITION_START        = 0;
     private static final int DRAWABLE_POSITION_END          = 1;
 
     private final WeakReference<EditText> viewWeakRef;
+    private final int extraTouchableAreaPx;
 
     private Drawable startButtonDrawable;
     private ColorStateList startButtonTintList;
@@ -67,7 +70,6 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
 
     private boolean handlingTouchEventStart = false;
     private boolean handlingTouchEventEnd = false;
-    private boolean isRtl = false;
 
     private OnCompoundButtonClickListener onStartButtonClickListener;
     private OnCompoundButtonClickListener onEndButtonClickListener;
@@ -77,7 +79,9 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
         viewWeakRef = new WeakReference<>(view);
         view.setOnTouchListener(this);
 
-        isRtl = getRtlState(view);
+        extraTouchableAreaPx = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                EXTRA_TOUCHABLE_AREA,
+                view.getResources().getDisplayMetrics());
 
         applyViewAttributes(view, attrs, defStyleAttrs);
     }
@@ -319,14 +323,12 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
         invalidateDrawables();
     }
 
-    private boolean getRtlState(@NonNull View view){
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
-                && view.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-    }
-
     private boolean isTouchInside(@NonNull View v, int xTouch, int yTouch, int drawablePosition){
         Rect iconRect;
-//        int iconWidth;
+
+        int viewPaddingStart = ViewCompat.getPaddingStart(v);
+        int viewPaddingEnd = ViewCompat.getPaddingEnd(v);
+        int ltDirection = ViewCompat.getLayoutDirection(v);
 
         switch(drawablePosition){
             case DRAWABLE_POSITION_START:
@@ -336,18 +338,8 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
                 }
 
                 iconRect = startButtonDrawable.copyBounds();
-//                iconWidth = iconRect.width();
-
-                if(!isRtl){
-//                    iconRect.right = iconWidth + EXTRA_TOUCHABLE_AREA;
-                    iconRect.right = iconRect.width() + EXTRA_TOUCHABLE_AREA;
-                } else {
-//                    iconRect.left = v.getWidth() - iconWidth - EXTRA_TOUCHABLE_AREA;
-                    iconRect.left = v.getWidth() - iconRect.width() - EXTRA_TOUCHABLE_AREA;
-                    iconRect.right = v.getWidth();
-                }
-
                 break;
+
             case DRAWABLE_POSITION_END:
                 if(endButtonDrawable == null
                         || onEndButtonClickListener == null){
@@ -355,21 +347,32 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
                 }
 
                 iconRect = endButtonDrawable.copyBounds();
-//                iconWidth = iconRect.width();
-
-                if(!isRtl){
-//                    iconRect.left = v.getWidth() - width - EXTRA_TOUCHABLE_AREA;
-                    iconRect.left = v.getWidth() - iconRect.width() - EXTRA_TOUCHABLE_AREA;
-                    iconRect.right = v.getWidth();
-                } else {
-//                    iconRect.right = width + EXTRA_TOUCHABLE_AREA;
-                    iconRect.right = iconRect.width() + EXTRA_TOUCHABLE_AREA;
-                }
                 break;
 
             default:
                 return false;
         }
+
+        int viewCenterVertical = v.getPaddingTop() + ((v.getHeight() - v.getPaddingBottom()) - v.getPaddingTop())/2;
+
+        if((drawablePosition == DRAWABLE_POSITION_START && ltDirection == ViewCompat.LAYOUT_DIRECTION_LTR)
+                || (drawablePosition == DRAWABLE_POSITION_END && ltDirection == ViewCompat.LAYOUT_DIRECTION_RTL)){
+
+            iconRect.offsetTo(viewPaddingStart, viewCenterVertical - iconRect.centerY());
+
+        } else if((drawablePosition == DRAWABLE_POSITION_START && ltDirection == ViewCompat.LAYOUT_DIRECTION_RTL)
+                || (drawablePosition == DRAWABLE_POSITION_END && ltDirection == ViewCompat.LAYOUT_DIRECTION_LTR)){
+
+            iconRect.offsetTo(v.getWidth() - viewPaddingEnd - iconRect.width(), viewCenterVertical - iconRect.centerY());
+
+        } else {
+            return false;
+        }
+
+        iconRect.left = iconRect.left - extraTouchableAreaPx;
+        iconRect.right = iconRect.right + extraTouchableAreaPx;
+        iconRect.top = iconRect.top - extraTouchableAreaPx;
+        iconRect.bottom = iconRect.bottom + extraTouchableAreaPx;
 
         return iconRect.contains(xTouch, yTouch);
     }
