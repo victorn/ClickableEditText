@@ -25,6 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_vertical_default"
+        android:paddingEnd="@dimen/padding_default"
+        android:paddingRight="@dimen/padding_default"
+        android:paddingTop="@dimen/padding_default"
         android:hint="@string/clickableedittext_dynamic_buttons"/>
 
     <android.support.design.widget.TextInputLayout
@@ -37,6 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/clickabletextinputedittext"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_medium"
             app:cet_drawableEnd="@drawable/ic_done_black_24dp"
             app:cet_drawableStart="@drawable/help_drawable"/>
 
