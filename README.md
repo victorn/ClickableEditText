@@ -48,7 +48,7 @@ dependencies {
 
     // other dependencies
 
-    compile('com.github.vnidens:ClickableEditText:0.5.0.2'){
+    compile('com.github.vnidens:ClickableEditText:0.5.0.3'){
         transitive = true
     }
 }
