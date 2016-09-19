@@ -377,7 +377,7 @@ class ClickableEditTextHelper implements View.OnTouchListener, ClickableTextInpu
         return iconRect.contains(xTouch, yTouch);
     }
 
-    private void invalidateDrawables(){
+    public void invalidateDrawables(){
         EditText view = viewWeakRef.get();
         if(view != null){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){

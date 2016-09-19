@@ -185,4 +185,10 @@ public class ClickableTextInputEditText extends TextInputEditText
             helper.getEndButtonDrawable().setState(ClickableEditTextHelper.STATE_DEFAULT);
         }
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        helper.invalidateDrawables();
+    }
 }
